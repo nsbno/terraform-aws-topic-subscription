@@ -1,11 +1,10 @@
 data "aws_sqs_queue" "this" {
-  name = var.queue.name
+  name   = var.queue.name
   region = var.queue.region
 }
 
 data "aws_iam_policy_document" "allow_sns_send" {
   statement {
-    sid = "AllowSendFromSns"
     effect = "Allow"
     principals {
       type        = "Service"
@@ -26,6 +25,6 @@ data "aws_iam_policy_document" "allow_sns_send" {
 resource "aws_sqs_queue_policy" "allow_sns_send" {
   queue_url = data.aws_sqs_queue.this.id
 
-  policy    = data.aws_iam_policy_document.allow_sns_send.json
-  region    = var.queue.region
+  policy = data.aws_iam_policy_document.allow_sns_send.json
+  region = var.queue.region
 }
