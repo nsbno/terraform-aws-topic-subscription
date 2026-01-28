@@ -20,11 +20,29 @@ module "publisher_subscriptions" {
 
   sqs_queues = {
     consumer = {
-      arn                  = aws_sqs_queue.consumer
-      raw_message_delivery = true
-      filter_policy = jsonencode({
+      arn                  = aws_sqs_queue.consumer.arn
+      raw_message_delivery = false
 
+      // Example of how to filter Events on the Attributes
+      filter_policy = jsonencode({
+        event_type = ["order_placed", "order_cancelled"]
+        store_id   = [{ prefix = "store-eu-" }]
+        priority   = [{ numeric = [">=", 1, "<=", 5] }]
       })
+      filter_policy_scope = "MessageAttributes"
+    }
+    only_some_messages = {
+      arn                  = aws_sqs_queue.consumer.arn
+      raw_message_delivery = true
+
+      // Example to how filter Events on the Payload itself
+      filter_policy = jsonencode({
+        detail = {
+          store_id = [{ prefix = "store-eu-" }]
+          priority = [{ numeric = [">=", 1, "<=", 5] }]
+        }
+      })
+      filter_policy_scope = "MessageBody"
     }
   }
 }

@@ -29,4 +29,5 @@ module "publisher_subscriptions" {
 
 # Examples
 
-1. [Simple Setup between SNS and SQS](./examples/simple.tf)
+1. [Simple Setup between SNS and SQS](./examples/simple/main.tf)
+1. [More advanced, with more config](./examples/advanced/main.tf)
