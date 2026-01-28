@@ -9,12 +9,12 @@ resource "aws_sns_topic" "publisher" {
 }
 
 resource "aws_sqs_queue" "consumer" {
-  name = "consumer"
+  name                    = "consumer"
   sqs_managed_sse_enabled = true
 }
 
 resource "aws_sqs_queue" "secondary_consumer" {
-  name = "secondary-consumer"
+  name                    = "secondary-consumer"
   sqs_managed_sse_enabled = true
 }
 
