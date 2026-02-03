@@ -28,4 +28,4 @@ jobs:
         run: terraform validate
 
   security-scan:
-    uses: nsbno/platform-actions/.github/workflows/helpers.security-scan.terraform.yml@trivy-github-action
+    uses: nsbno/platform-actions/.github/workflows/security.scan.terraform.yml@main
